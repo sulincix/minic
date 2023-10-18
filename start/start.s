@@ -2,7 +2,6 @@
 .global exit
 .section .note.GNU-stack
 .section .text
-.type   _start,@function
 
 _start:
 	popq	%rdi

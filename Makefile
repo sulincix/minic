@@ -1,9 +1,12 @@
 build: clean
-	mkdir build
-	gcc -o build/libminic.so -shared src/*.c -nostdlib -O0 -nostdinc -Isrc -Wno-all -Wno-builtin-declaration-mismatch
+	mkdir build/start -p
+	$(CC) -c start/exit.c -o build/start/exit.o -Ilibminic -nostdlib -nostdinc -Wno-all
+	$(CC) -c start/start.s -o build/start/start.o -Ilibminic -nostdlib -nostdinc
+	$(CC) -c start/libc_main.c -o build/start/libc_main.o -Ilibminic -nostdlib -nostdinc
+	$(CC) $(wildcard libminic/*.c) -nostdlib -nostdinc -Ilibminic -shared -o build/libminic.so
 
-test-bin:
-	gcc src/start/* test/main.c -Lbuild -Isrc/ -lminic -o build/main -nostdlib -O0
+test:
+	./bin/gcc-minic test-files/main.c -o build/main
 	LD_LIBRARY_PATH=build ./build/main
 clean:
 	rm -rf build
