@@ -1,2 +1,2 @@
 #!/bin/bash
-gcc build/start/*.o -Lbuild -Ilibminic/ -nostdinc -lminic -nostdlib "$@"
+gcc "$@" -Ilibminic -lminic -Lbuild -nostdlib -nostdinc build/start/*
